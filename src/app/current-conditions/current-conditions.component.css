@@ -1,7 +1,27 @@
 .close {
   cursor: pointer;
 }
+
+.tab-group {
+  display: flex;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
+}
+
+.close-btn {
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #fff;
+}
+
+.content {
+  padding-left: 3px;
 }

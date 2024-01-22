@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiCacheTimeout: 1000 * 60 * 60 * 2, // amount of time a cached item is valid, in milliseconds.
 };
