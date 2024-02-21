@@ -4,6 +4,7 @@ import { LocationService } from '../location.service';
 import { Router } from '@angular/router';
 import { ConditionsAndZip } from '../conditions-and-zip.type';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { Tab } from '../tab/tab.component';
 
 @Component({
   selector: 'app-current-conditions',
@@ -11,6 +12,7 @@ import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
   styleUrls: ['./current-conditions.component.css'],
 })
 export class CurrentConditionsComponent {
+  tabs: Tab[] = [];
 
   protected weatherService = inject(WeatherService);
   private router = inject(Router);
@@ -24,12 +26,18 @@ export class CurrentConditionsComponent {
     toObservable(this.currentConditionsByZip).pipe(takeUntilDestroyed()).subscribe((conditions) => {
       if (conditions.length > 0) {
         this.tab.set(conditions[0]);
+
+        this.tabs = conditions.map((condition) => ({ id: condition.zip, title: `${condition.data.name} (${condition.zip})` }));
       }
     });
   }
 
-  selectTab(location: ConditionsAndZip) {
-    this.tab.set(location);
+  onSelectedTab(tab: Tab) {
+    this.tab.set(this.currentConditionsByZip().find((condition) => condition.zip === tab.id));
+  }
+
+  onDeletedTab(tab: Tab) {
+    this.locationService.removeLocation(tab.id);
   }
 
   showForecast(zipcode: string) {
