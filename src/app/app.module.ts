@@ -13,8 +13,9 @@ import {RouterModule} from "@angular/router";
 import {routing} from "./app.routing";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { TabComponent } from './tab/tab.component';
+import { TabsComponent } from './tab/tabs.component';
 import { CachingInterceptor } from './caching.interceptor';
+import { TabComponent } from './tab/tab.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CachingInterceptor } from './caching.interceptor';
     HttpClientModule,
     RouterModule,
     routing,
+    TabsComponent,
     TabComponent,
   ],
   providers: [
